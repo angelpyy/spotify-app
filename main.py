@@ -5,6 +5,7 @@ from saturday import saturday as get_sat
 from scrape import scrape_website as scrape
 
 
+# Fix Spotify's silly goofy 1hr authetincation token
 def refresh():
     global token_info, sp
 
@@ -40,6 +41,7 @@ else:
     token = token_info['access_token']
 
 if token:
+    # Init Spotify API fella
     sp = spotipy.Spotify(auth=token)
 
     # Retrieve every date necessary for creation
@@ -75,6 +77,7 @@ if token:
             # Add the track to the playlist
             sp.playlist_add_items(playlist_id, [track['id']])
 
+        # Refresh the Auth Token
         refresh()
 else:
     print("Can't get token for", user_id)
